@@ -68,22 +68,31 @@ class B2aDetectorConstruction : public G4VUserDetectorConstruction
     G4VPhysicalVolume* DefineVolumes();
   
     // data members
-    G4int fNbOfChambers;
+    G4int fNbOfSiPM;				//number of SiPM
+    //poiters to logical volumes 
+    G4LogicalVolume*   fLogicTarget;     	//target
+    G4LogicalVolume*   fLogicStopper;   	//stopper
+    G4LogicalVolume*   fLogicGeDetActive;       //active region of GeDet
+    G4LogicalVolume*   fLogicGeDetCrystal;	//germanium crystal = outer deadlayer
+    G4LogicalVolume*   fLogicGeDetID;  		//inner deadlayer
+    G4LogicalVolume*   fLogicGeDetHole; 	//hole for cooling finger in crystal
+    G4LogicalVolume*   fLogicGeDetOS; 		//outer shielding
+    G4LogicalVolume*   fLogicGeDetIS;   	//inner shielding
+    G4LogicalVolume*   fLogicGeDetOuterVacuum;  //outer vacuum between OS and IS
+    G4LogicalVolume*   fLogicGeDetInnerVacuum;  //inner vacuum between IS and crystal
+    G4LogicalVolume*   fLogicGeDetISHole;	//hole for cooling finger in IS	
+    G4LogicalVolume**  fLogicSiPM;   		//SiPM
 
-    G4LogicalVolume*   fLogicTarget;     // pointer to the logical Target
-    G4LogicalVolume*   fLogicStopper;    // pointer to the logical Stopper
-    G4LogicalVolume*   fLogicGeDet;      // pointer to the logical GeDet
-    G4LogicalVolume*   fLogicDeadlayer;  // pointer to the logical Deadlayer
-    G4LogicalVolume*   fLogicAlCap;      // pointer to the logical AlCap
-    G4LogicalVolume**  fLogicChamber;    // pointer to the logical Chamber
+    // pointer to materials
+    G4Material*        fTargetMaterial; 	//target
+    G4Material*        fSiPMMaterial;   	//SiPM
+    G4Material*        fStopperMaterial; 	//stopper
+    G4Material*        fGeDetMaterial;   	//germanium detector
+    G4Material*        fVacuum;			//vaccum	
+    G4Material*	       fAir;			//air
+    G4UserLimits* fStepLimit;         		// pointer to user step limits
 
-    G4Material*        fTargetMaterial;  // pointer to the target  material
-    G4Material*        fChamberMaterial; // pointer to the chamber material
-    G4Material*        fStopperMaterial; // pointer to the blocker material
-    G4Material*        fGeDetMaterial;   // pointer to the GeDet material
-    G4UserLimits* fStepLimit;            // pointer to user step limits
-
-    B2aDetectorMessenger*  fMessenger;   // messenger
+    B2aDetectorMessenger*  fMessenger;   	// messenger
 
     static G4ThreadLocal G4GlobalMagFieldMessenger*  fMagFieldMessenger; 
                                          // magnetic field messenger
